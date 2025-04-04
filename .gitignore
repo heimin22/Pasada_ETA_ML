@@ -1,0 +1,75 @@
+# Core
+*.pyc
+__pycache__/
+.pytest_cache/
+*.swp
+*.swo
+
+# Data files (never commit raw/processed data)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep  # Preserve directory structure
+!data/processed/.gitkeep
+
+# Models
+models/*.pkl
+models/*.joblib
+models/*.h5
+models/*.pt
+
+# Environment & credentials
+.env
+.env.local
+.env.*
+*.env
+secrets.yml
+config.yml
+
+# Jupyter/Notebooks
+.notebooks/
+.ipynb_checkpoints/
+*.ipynb
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# IDE specific
+.vscode/
+.idea/
+.DS_Store
+*.code-workspace
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Local development
+local_settings.py
+instance/
+
+# Build/compiled files
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Temporary files
+*.tmp
+*.bak
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ML-specific
+mlruns/  # MLflow
+wandb/   # Weights & Biases
