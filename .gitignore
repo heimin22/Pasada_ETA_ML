@@ -4,6 +4,7 @@ __pycache__/
 .pytest_cache/
 *.swp
 *.swo
+.idea
 
 # Data files (never commit raw/processed data)
 data/raw/*
