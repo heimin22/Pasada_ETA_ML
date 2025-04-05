@@ -3,15 +3,20 @@ import os
 from dotenv import load_dotenv
 
 def gemini_test(user_input, api_key):
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=GEMINI_API_ML"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
     headers = {"Content-Type": "application/json"}
-    data = {"prompt": user_input}
+    data = {
+        "contents": [{
+            "parts": [{"text": user_input}]
+        }]
+    }
     try:
-        response = response.post(url, headers=headers, json=data)
+        response = requests.post(url, headers=headers, json=data)
         response.raise_for_status()
-        return response.json().get("generated_text", "No response")
+        return response.json()["candidates"][0]["content"]["parts"][0]["text"]
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
+        return "HAHAHAHAHA bobo ka raw"
         
 if __name__ == "__main__":
     load_dotenv()
@@ -32,7 +37,6 @@ if __name__ == "__main__":
         if not user_input:
             print("Bawal blangko tarantado, type mo yung prompt mo.")
             continue
-        
-        print(f"Me: {user_input}")
+
         response = gemini_test(user_input, api_key)
         print(f"Gemini: {response}")
