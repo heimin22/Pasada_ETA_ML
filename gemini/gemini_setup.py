@@ -6,7 +6,7 @@ load_dotenv()
 
 def geminiRequests(user_input):
     # this is the URL for the Gemini
-    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=GEMINI_API_ML"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=GEMINI_API_ML"
     api_key = os.environ.get('GEMINI_API_ML')
         
     if not api_key:
