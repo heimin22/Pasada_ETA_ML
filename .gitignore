@@ -74,3 +74,4 @@ htmlcov/
 # ML-specific
 mlruns/  # MLflow
 wandb/   # Weights & Biases
+.idea/workspace.xml
