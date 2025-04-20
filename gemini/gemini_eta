@@ -2,6 +2,17 @@ import joblib
 from pathlib import Path
 import json
 import requests
+import pandas as pd
+from datetime import datetime
+
+def load_transport_runs():
+    # load and cache the processed transport data
+    data_path = Path(__file__).parent.parent / 'data' / 'processed' / 'processed_transport_runs.csv'
+    if data_path.exists():
+        return pd.read_csv(data_path)
+    return None
+
+
 
 def gemini_eta_predict(user_input, api_key):
     # load the ETA model
