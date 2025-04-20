@@ -1,0 +1,14 @@
+import joblib
+from pathlib import Path
+import json
+
+def gemini_eta_predict(user_input, api_key):
+    # load the ETA model
+    model_path = Path(__file__).parent.parent / 'models' / 'eta_model.pkl'
+    model = joblib.load(model_path)
+    
+    uri = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
+    headers = {"Content-Type": "application/json"}
+    
+    # get ETA prediction
+    
