@@ -1,8 +1,11 @@
+import joblib
+from pathlib import Path
+import json
 import requests
 import os
 from dotenv import load_dotenv
 
-def gemini_test(user_input, api_key):
+def gemini_eta_predict(user_input, api_key):
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
     headers = {"Content-Type": "application/json"}
     data = {
@@ -38,5 +41,5 @@ if __name__ == "__main__":
             print("Bawal blangko tarantado, type mo yung prompt mo.")
             continue
 
-        response = gemini_test(user_input, api_key)
+        response = gemini_eta_predict(user_input, api_key)
         print(f"Gemini: {response}")
