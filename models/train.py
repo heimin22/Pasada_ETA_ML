@@ -7,7 +7,20 @@ def load_raw_data():
 
 def clean_data(df):
     # TODO: dito dapat yung data cleaning logic ko sa susunod
+    df = df.copy()
+    df = df.drop_duplicates()
     df = df.dropna()
+
+    # convert timestamp to datetime
+    df['timestamp'] = pd.to_datetime(df['timestamp'])
+
+    # remove outliers
+    # using IQR method
+    Q1 = df['eta'].quantile(0.25)
+    Q3 = df['eta'].quantile(0.75)
+    IQR = Q3 - Q1
+    df = df[~((df['eta'] < (Q1 - 1.5 * IQR)) | (df['eta'] > (Q3 + 1.5 * IQR)))]
+    df = df.reset_index(drop=True)
     return df
 
 def engineer_features(df):
