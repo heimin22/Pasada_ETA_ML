@@ -6,11 +6,13 @@ __pycache__/
 *.swo
 .idea
 
-# Data files (never commit raw/processed data)
-data/raw/*
-data/processed/*
-!data/raw/.gitkeep  # Preserve directory structure
+# Data files
+data/raw/*.json
+data/processed/*.json
+data/splits/*.json
+!data/raw/.gitkeep
 !data/processed/.gitkeep
+!data/splits/.gitkeep
 
 # Models
 models/*.pkl
