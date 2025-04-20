@@ -19,6 +19,7 @@ models/*.pkl
 models/*.joblib
 models/*.h5
 models/*.pt
+models/*.json
 
 # Environment & credentials
 .env
