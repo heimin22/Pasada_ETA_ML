@@ -11,4 +11,30 @@ def gemini_eta_predict(user_input, api_key):
     headers = {"Content-Type": "application/json"}
     
     # get ETA prediction
+    try:
+        features = json.loads(user_input)
+        eta_prediction = float(model.predict([features])[0])
+        
+        # make API request to Gemini
+        enhanced_prompt = f"{eta_prediction:.2f} m, {user_input}"
+        
+        data = {
+            "contents": [{
+                "parts": [{"text": enhanced_prompt}]
+            }]
+        }
+        
+        response = requests.post(uri, headers=headers, json=data)
+        response.raise_for_status()
+        
+        return {
+            "eta_prediction": eta_prediction,
+            "gemini_response": response.json()["candidates"][0]["content"]["parts"][0]["text"]
+        }
+    except Exception as e:
+        return {
+            "eta_prediction": None,
+            "gemini_response": f"An error occurred: {str(e)}"
+        }
+        
     
