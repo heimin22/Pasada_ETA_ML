@@ -12,7 +12,31 @@ def load_transport_runs():
         return pd.read_csv(data_path)
     return None
 
-
+def get_historical_stats(df, pick_up, drop_off, time_str):
+    # calculate historical stats for a given route and time
+    try:
+        # convert input time to minutes
+        time = datetime.strptime(time_str, '%I:%M%p')
+        time_minutes = time.hour * 60 + time.minute
+        
+        # filter relevant routes
+        routes_data = df[(df['pick_up'] == pick_up) & (df['drop_off'] == drop_off)]
+        
+        if routes_data.empty:
+            return None
+        
+        # calculate statistics
+        stats = {
+            'avg_travel_time': route_data['lap_minutes'].mean(),
+            'min_travel_time': route_data['lap_minutes'].min(),
+            'max_travel_time': route_data['lap_minutes'].max(),
+            'common_traffic': route_data['traffic'].mode().iloc[0]
+        }
+        
+        return stats
+    except Exception as e:
+        return None
+    
 
 def gemini_eta_predict(user_input, api_key):
     # load the ETA model
