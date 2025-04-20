@@ -1,6 +1,7 @@
 import joblib
 from pathlib import Path
 import json
+import requests
 
 def gemini_eta_predict(user_input, api_key):
     # load the ETA model

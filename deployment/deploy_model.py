@@ -1,18 +1,24 @@
 from flask import Flask, request, jsonify
 import joblib
 from pathlib import Path
+from gemini.gemini_eta import gemini_eta_predict
+import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
+load_dotenv()
 
-# load na agad yung model on startup
-model_path = Path(__file__) / 'models' / 'eta_model.pkl'
-model = joblib.load(model_path)
+@app.route('/predict_eta_with_gemini', methods=['POST'])
 
-@app.route('/predict_eta', methods=['POST'])
-def predict_eta():
+def predict_eta_with_gemini():
     data = request.get_json()
-    prediction = model.predict([data['features']])
-    return jsonify({'eta_prediction': prediction[0]})
+    api_key = os.getenv("GEMINI_API_ML")
+    
+    if not api_key:
+        return jsonify({"error": "API key not found"}), 400
+    
+    result = gemini_eta_predict(json.dumps(data ["features"]), api_key)
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
