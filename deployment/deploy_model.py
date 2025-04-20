@@ -1,7 +1,8 @@
+import json
 from flask import Flask, request, jsonify
 import joblib
 from pathlib import Path
-from gemini.gemini_eta import gemini_eta_predict
+from gemini.gemini_eta import gemini_eta_predict # type: ignore
 import os
 from dotenv import load_dotenv
 
